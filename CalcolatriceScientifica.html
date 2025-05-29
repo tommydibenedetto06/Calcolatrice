@@ -1,0 +1,209 @@
+<html>
+<body style="background-color:rgb(139, 184, 190);">
+    <input type="text" id="screen" style="width: 200px; height: 50px; background-color:rgb(120, 141, 210);" ><br><br>
+
+    <button onclick="sette()" style="background-color:rgb(93, 194, 222);"> 7 </button>
+    <button onclick="otto()" style="background-color:rgb(93, 194, 222);"> 8 </button>
+    <button onclick="nove()" style="background-color:rgb(93, 194, 222);"> 9 </button>
+    <button onclick="radicequadrata()" style="background-color:rgb(93, 194, 222);"> √ </button>
+    <button onclick="potenza()" style="background-color:rgb(93, 194, 222);"> ** </button>
+    <br><br>
+    <button onclick="quattro()" style="background-color:rgb(93, 194, 222);"> 4 </button>
+    <button onclick="cinque()" style="background-color:rgb(93, 194, 222);"> 5 </button>
+    <button onclick="sei()" style="background-color:rgb(93, 194, 222);"> 6 </button>
+    <button onclick="moltiplicazione()" style="background-color:rgb(93, 194, 222);"> * </button>
+    <button onclick="divisione()" style="background-color:rgb(93, 194, 222);"> / </button>
+    <br><br>
+    <button onclick="uno()" style="background-color:rgb(93, 194, 222);"> 1 </button>
+    <button onclick="due()" style="background-color:rgb(93, 194, 222);"> 2 </button>
+    <button onclick="tre()" style="background-color:rgb(93, 194, 222);"> 3 </button>
+    <button onclick="somma()" style="background-color:rgb(93, 194, 222);"> + </button>
+    <button onclick="sottrazione()" style="background-color:rgb(93, 194, 222);"> - </button>
+    <br><br>
+    <button onclick="cancellaTutto()" style= "background-color:rgb(93, 194, 222);">AC</button>
+    <button onclick="zero()" style="background-color:rgb(93, 194, 222);"> 0 </button>
+    <button onclick="percentuale()" style="background-color:rgb(93, 194, 222);"> % </button>
+    <button onclick="uguale()" style="background-color:rgb(93, 194, 222);"> = </button>
+    <br><br>
+
+    <script>
+     var controllo = ""
+     function zero()
+     {
+        document.getElementById("screen").value += 0
+     }
+
+     function uno()
+     {
+        document.getElementById("screen").value += 1
+     }
+
+     function due()
+     {
+        document.getElementById("screen").value += 2
+     }
+
+     function tre()
+     {
+        document.getElementById("screen").value += 3
+     }
+
+     function quattro()
+     {
+        document.getElementById("screen").value += 4
+     }
+
+     function cinque()
+     {
+        document.getElementById("screen").value += 5
+     }
+
+     function sei()
+     {
+        document.getElementById("screen").value += 6
+     }
+
+     function sette()
+     {
+        document.getElementById("screen").value += 7
+     }
+
+     function otto()
+     {
+        document.getElementById("screen").value += 8
+     }
+
+     function nove()
+     {
+        document.getElementById("screen").value += 9
+     }
+
+     function somma()
+     {
+        document.getElementById("screen").value += "+"
+        controllo = "+"
+     }
+
+     function sottrazione()
+     {
+        document.getElementById("screen").value += "-"
+        controllo = "-"
+
+     }
+
+     function moltiplicazione ()
+     {
+        document.getElementById("screen").value += "*"
+        controllo = "*"
+
+     }
+
+     function divisione()
+     {
+        document.getElementById("screen").value += "/"
+        controllo = "/"
+
+     }
+
+     function potenza()
+     {
+        document.getElementById("screen").value += "**"
+        controllo = "**"
+
+     }
+
+     function percentuale()
+     {
+        document.getElementById("screen").value += "% di "
+        controllo = "%"
+
+     }
+
+     function radicequadrata()
+     {
+        document.getElementById("screen").value += "√"
+        controllo = "√"
+
+     }
+
+     function cancellaTutto()
+     {
+        document.getElementById("screen").value = ""
+     }
+
+     function uguale()
+     {
+       var operandi = document.getElementById("screen").value.split(/(\+|\-|\*|\/)/);
+       var risultato = 0
+
+       while (operandi.includes('*') || operandi.includes('/'))
+       {
+       for (var i = operandi.length; i != 0 ; i--)
+       {
+         var indiceDispari = 1
+        
+         if (operandi[indiceDispari] === '*')
+          {
+                risultato = parseFloat(operandi[indiceDispari -1]) * parseFloat (operandi[indiceDispari + 1])
+                operandi[indiceDispari - 1] = risultato;
+                operandi.splice(indiceDispari, 2);
+          }
+
+          if (operandi[indiceDispari] === '/')
+          {
+                risultato = parseFloat(operandi[indiceDispari -1]) / parseFloat (operandi[indiceDispari + 1])
+                operandi[indiceDispari - 1] = risultato;
+                operandi.splice(indiceDispari, 2);
+          }
+      }
+      indiceDispari += 2
+   }
+
+   while (operandi.includes('+') || operandi.includes('-'))
+   {
+      for (var i = operandi.length; i != 0 ; i--)
+       {
+           var indiceDispari = 1
+            if (operandi[indiceDispari] === '+')
+            {
+                   risultato = parseFloat(operandi[indiceDispari -1]) + parseFloat (operandi[indiceDispari +1])
+                   operandi[indiceDispari - 1] = risultato;
+                   operandi.splice(indiceDispari, 2);
+            }
+
+           if (operandi[indiceDispari] === '-')
+            {
+                   risultato = parseFloat(operandi[indiceDispari -1]) - parseFloat (operandi[indiceDispari +1])
+                   operandi[indiceDispari - 1] = risultato;
+                   operandi.splice(indiceDispari, 2);
+            }
+          }
+          indiceDispari += 2
+       }
+
+
+      if (controllo === "**")
+      {
+        var operandi = document.getElementById("screen").value.split(/(\**)/)
+        risultato = Math.pow(parseFloat(operandi[operandi.indexOf("**") - 1]), parseFloat(operandi[operandi.indexOf("**") + 1]))
+
+      }
+
+      if (controllo === "%")
+      {
+        var operandi = document.getElementById("screen").value.split(/(\% di )/)
+        risultato =  parseFloat ((operandi[operandi.indexOf('% di ')-1]) * parseFloat(operandi[operandi.indexOf('% di ')+1]) / 100)
+      }
+
+      if (controllo === "√")
+      {
+        var operandi = document.getElementById("screen").value.split(/(\√)/)
+        risultato =  Math.sqrt(parseFloat (operandi[operandi.indexOf('√')+1]))
+      }
+
+      document.getElementById("screen").value += "=" + risultato;
+     }
+    </script>
+
+</body>
+</html>        
